@@ -2,12 +2,18 @@ package com.app.mealplanner.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ingredients")
-@Data
-public class Ingredient {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class IngredientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

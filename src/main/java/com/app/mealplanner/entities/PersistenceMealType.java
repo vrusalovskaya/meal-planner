@@ -1,6 +1,6 @@
 package com.app.mealplanner.entities;
 
-public enum MealType {
+public enum PersistenceMealType {
     BREAKFAST,
     LUNCH,
     DINNER
