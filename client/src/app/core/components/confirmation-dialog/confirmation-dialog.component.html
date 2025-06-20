@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{paratemers.title}}</h2>
+
+<mat-dialog-content>
+   <span>{{paratemers.content}}</span>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+   <button mat-button (click)="onConfirm()">
+      {{paratemers.confirmButtonText}}
+   </button>
+   <button cdkFocusInitial mat-button (click)="onCancel()">
+      {{paratemers.cancelButtonText}}
+   </button>
+</mat-dialog-actions>

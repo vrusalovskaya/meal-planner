@@ -1,0 +1,6 @@
+<h2 class="title">Ingredients</h2>
+@for (ingredient of ingredients; track ingredient.id) {
+<div class="ingredient">
+   <mp-ingredient [ingredient]="ingredient" (deleteAction)="onIngredientDelete(ingredient)"></mp-ingredient>
+</div>
+}
