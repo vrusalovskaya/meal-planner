@@ -5,10 +5,11 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
 import { filter, map, debounceTime, distinctUntilChanged, tap } from "rxjs";
 
 import { LoadingOverlayService } from "./core/loading-overlay/loading-overlay.service";
+import { AppNavigationComponent } from "./core/components/app-navigation/app-navigation.component";
 
 @Component({
    selector: "mp-root",
-   imports: [RouterOutlet],
+   imports: [RouterOutlet, AppNavigationComponent],
    templateUrl: "./app.html",
    styleUrl: "./app.scss"
 })
