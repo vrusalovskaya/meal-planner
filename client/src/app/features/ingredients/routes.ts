@@ -3,6 +3,7 @@ import { inject } from "@angular/core";
 
 import { IngredientsComponent } from "./ingredients.component";
 import { IngredientsService } from "./services/ingredients.service";
+import { IngredientDialogService } from "./services/ingredient-dialog.service";
 
 const dataResolver: ResolveFn<unknown> = () => {
 
@@ -17,6 +18,7 @@ export const ROUTES: Route[] = [{
     component: IngredientsComponent,
     providers: [
        IngredientsService,
+       IngredientDialogService
     ],
     resolve: { _: dataResolver }
 }];

@@ -11,8 +11,13 @@ import { IngredientComponent } from "../ingredient/ingredient.component";
 export class IngredientListComponent {
    @Input({ required: true }) ingredients: Ingredient[] = [];
    @Output() ingredientDelete = new EventEmitter<Ingredient>();
+   @Output() ingredientEdit = new EventEmitter<Ingredient>();
 
    onIngredientDelete(ingredient: Ingredient) {
       this.ingredientDelete.emit(ingredient);
+   }
+
+   onIngredientEdit(ingredient: Ingredient){
+      this.ingredientEdit.emit(ingredient);
    }
 }

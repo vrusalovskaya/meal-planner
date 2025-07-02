@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content>
+   <form #form="ngForm" (ngSubmit)="save()" class="full-width">
+      <mat-form-field appearance="fill" class="full-width">
+         <mat-label>Ingredient name</mat-label>
+         <input matInput name="name" required maxlength="256" [(ngModel)]="ingredient.name" #nameCtrl="ngModel" />
+         <mat-error>
+            This field is required
+         </mat-error>
+         <mat-hint align="end">{{ingredient.name.length}} / 256</mat-hint>
+      </mat-form-field>
+
+      <section>
+         <h4>Select possible units of measurement*</h4>
+         @for (unit of units; track unit.value) {
+         <div>
+            <mat-checkbox [checked]="unit.selected" (change)="onUnitSelectionChange(unit, $event)"
+               [name]="unit.value">{{unit.value}}
+            </mat-checkbox>
+         </div>
+         }
+      </section>
+   </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+   <button matButton [mat-dialog-close]="undefined">Close</button>
+   <button matButton [disabled]="form.invalid || selectedUnits.length === 0" (click)="save()">
+      Save
+   </button>
+</mat-dialog-actions>

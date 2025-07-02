@@ -3,16 +3,15 @@ package com.app.mealplanner.mappers;
 import com.app.mealplanner.entities.*;
 import com.app.mealplanner.models.*;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 public class EntityModelMapper {
     public static Ingredient toModel(IngredientEntity ingredientEntity) {
-        return new Ingredient(ingredientEntity.getId(), ingredientEntity.getName());
+        return new Ingredient(ingredientEntity.getId(), ingredientEntity.getName(), ingredientEntity.getPossibleUnits());
     }
 
     public static IngredientEntity toEntity(Ingredient ingredient) {
-        return new IngredientEntity(ingredient.getId(), ingredient.getName());
+        return new IngredientEntity(ingredient.getId(), ingredient.getName(), ingredient.getPossibleUnits());
     }
 
     public static Recipe toModel(RecipeEntity recipeEntity) {
@@ -25,47 +24,39 @@ public class EntityModelMapper {
 
     public static DishIngredient toModel(DishIngredientEntity dishIngredientEntity) {
         return new DishIngredient(dishIngredientEntity.getId(), toModel(dishIngredientEntity.getIngredient()),
-                dishIngredientEntity.getQuantity());
+                dishIngredientEntity.getQuantity(), dishIngredientEntity.getUnit(), dishIngredientEntity.getComment());
     }
 
     public static DishIngredientEntity toEntity(DishIngredient dishIngredient) {
         return new DishIngredientEntity(dishIngredient.getId(), toEntity(dishIngredient.getIngredient()),
-                dishIngredient.getQuantity());
+                dishIngredient.getQuantity(), dishIngredient.getUnit(), dishIngredient.getComment());
     }
 
     public static RationItem toModel(RationItemEntity rationItemEntity) {
-        return new RationItem(rationItemEntity.getId(), ServiceMealType.valueOf(String.valueOf(rationItemEntity.getMealType())),
+        return new RationItem(rationItemEntity.getId(), rationItemEntity.getMealType(),
                 toModel(rationItemEntity.getDish()));
     }
 
     public static RationItemEntity toEntity(RationItem rationItem) {
-        return new RationItemEntity(rationItem.getId(), PersistenceMealType.valueOf(String.valueOf(rationItem.getMealType())),
+        return new RationItemEntity(rationItem.getId(), rationItem.getMealType(),
                 toEntity(rationItem.getDish()));
     }
 
     public static Dish toModel(DishEntity dishEntity) {
-        Set<ServiceMealType> mealTypes = dishEntity.getMealTypes()
-                .stream().map(x -> ServiceMealType.valueOf(String.valueOf(x)))
-                .collect(Collectors.toSet());
-
         return new Dish(dishEntity.getId(),
                 dishEntity.getName(),
                 toModel(dishEntity.getRecipe()),
-                mealTypes,
-                dishEntity.getDishIngredients().stream().map(EntityModelMapper::toModel).toList());
+                dishEntity.getMealTypes(),
+                new ArrayList<>(dishEntity.getDishIngredients().stream().map(EntityModelMapper::toModel).toList()));
     }
 
     public static DishEntity toEntity(Dish dish) {
-        Set<PersistenceMealType> mealTypes = dish.getMealTypes()
-                .stream().map(x -> PersistenceMealType.valueOf(String.valueOf(x)))
-                .collect(Collectors.toSet());
-
         return new DishEntity(
                 dish.getId(),
                 dish.getName(),
                 toEntity(dish.getRecipe()),
-                mealTypes,
-                dish.getIngredients().stream().map(EntityModelMapper::toEntity).toList()
+                dish.getMealTypes(),
+                new ArrayList<>(dish.getIngredients().stream().map(EntityModelMapper::toEntity).toList())
         );
     }
 

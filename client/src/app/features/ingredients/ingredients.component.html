@@ -1,4 +1,6 @@
-<!-- <div class="center">
-  <button matButton="filled" (click)="onAddTaskClicked()" >Add Task</button>
-</div> -->
-<mp-ingredient-list [ingredients]="ingredients" (ingredientDelete)="onIngredientDelete($event)"></mp-ingredient-list>
+<h2 class="center">Ingredients</h2>
+<div class="center">
+   <button matButton="filled" (click)="onAddIngredientClicked()">Add Ingredient</button>
+</div>
+<mp-ingredient-list [ingredients]="ingredients" (ingredientDelete)="onIngredientDelete($event)"
+   (ingredientEdit)="onIngredientEdit($event)"></mp-ingredient-list>
