@@ -1,5 +1,6 @@
 package com.app.mealplanner.entities;
 
+import com.app.mealplanner.common.enums.MealType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class RationItemEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "meal_type", length = 10, nullable = false)
-    private PersistenceMealType mealType;
+    private MealType mealType;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "dish_id", nullable = false)

@@ -1,20 +1,19 @@
-package com.app.mealplanner.models;
+package com.app.mealplanner.dtos.dishes;
 
 import com.app.mealplanner.common.enums.MealType;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
-public class Dish {
+public class DishDto {
     private Long id;
     private String name;
-    private Recipe recipe;
+    private String recipeDescription;
+    private String recipeExternalLink;
     private Set<MealType> mealTypes;
-    private List<DishIngredient> ingredients;
+    private List<DishIngredientDto> dishIngredients;
 }

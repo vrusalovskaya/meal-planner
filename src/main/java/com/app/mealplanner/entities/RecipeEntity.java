@@ -18,7 +18,8 @@ public class RecipeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 255)
+    @Size(max = 2000)
+    @Column(length = 2000)
     private String description;
 
     @Size(max = 255)

@@ -1,0 +1,5 @@
+<mat-accordion multi>
+@for (dish of dishes; track dish.id) {
+      <mp-dish class="dish" [dish]="dish" (deleteAction)="onDishDelete(dish)" (editAction)="onDishEdit(dish)"></mp-dish>
+}
+</mat-accordion>

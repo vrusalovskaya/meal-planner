@@ -6,7 +6,7 @@ html {
             tertiary: mat.$blue-palette,
          ),
          typography: Roboto,
-         density: -3,
+         density: 0,
       ));
 }
 
@@ -29,4 +29,8 @@ body {
 .mp-loading-overlay-panel {
    @include mat.dialog-overrides((container-color: transparent,
       ));
+}
+
+.full-width {
+   width: 100%;
 }

@@ -1,0 +1,24 @@
+<mat-expansion-panel>
+   <mat-expansion-panel-header>
+      <mat-panel-title> {{dish.name}} </mat-panel-title>
+      <mat-action-row>
+         <button matButton (click)="onEditButtonClicked($event)">Edit</button>
+         <button matButton (click)="onDeleteButtonClicked($event)">Delete</button>
+      </mat-action-row>
+   </mat-expansion-panel-header>
+
+   <ng-template matExpansionPanelContent>
+      <mat-chip-set aria-label="Fish selection">
+         @for (mealType of dish.mealTypes; track $index) {
+         <mat-chip>{{mealType}}</mat-chip>
+         }
+      </mat-chip-set>
+      <mp-dish-ingredients-list [dishIngredients]="dish.dishIngredients"></mp-dish-ingredients-list>
+      {{dish.recipeDescription}}
+      <br>
+      @if (trustedUrl) {
+         <a matButton="outlined" [href]="trustedUrl" rel="noopener noreferrer" target="_blank">Recipe link</a>
+      }
+   </ng-template>
+
+</mat-expansion-panel>

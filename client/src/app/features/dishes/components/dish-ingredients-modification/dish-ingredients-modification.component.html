@@ -1,0 +1,50 @@
+@for (dishIngredient of dishIngredients; track $index) {
+<div class="form-fields">
+   <mat-form-field class="full-width">
+      <mat-label>Ingredient</mat-label>
+      <input type="text" [(ngModel)]="dishIngredient.ingredient" matInput #input="ngModel"
+         (keyup)="onIngredientInput(input)" [matAutocomplete]="auto" />
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onIngredientSelected($event, dishIngredient, input)"
+         [displayWith]="formatOption">
+         @for (ingredient of filteredIngredients; track ingredient.id) {
+         <mat-option [value]="ingredient">
+            {{ ingredient.name }}
+         </mat-option>
+         }
+      </mat-autocomplete>
+
+      <mat-error>Selection required</mat-error>
+
+   </mat-form-field>
+
+   <mat-form-field>
+      <mat-label>Quantity</mat-label>
+      <input matInput type="number" [(ngModel)]="dishIngredient.quantity" (ngModelChange)="emitChange()" min="0"
+         [disabled]="dishIngredient.ingredient.id === -1 || dishIngredient.ingredient.possibleUnits[0] === 'NO_MEASUREMENT'" />
+      <mat-error>Positive only</mat-error>
+   </mat-form-field>
+
+   <mat-form-field>
+      <mat-label>Unit</mat-label>
+      <mat-select [(ngModel)]="dishIngredient.unit" (selectionChange)="emitChange()" name="unit"
+         [disabled]="dishIngredient.ingredient.id === -1">
+         @for (unit of dishIngredient.ingredient.possibleUnits; track $index) {
+         <mat-option [value]="unit">{{unit}}</mat-option>
+         }
+      </mat-select>
+   </mat-form-field>
+
+   <button matIconButton  type="button" (click)="deleteDishIngredient(dishIngredient)">
+      <mat-icon>delete</mat-icon>
+   </button>
+
+</div>
+<mat-form-field class="full-width">
+   <mat-label>Comment</mat-label>
+   <input matInput type="text" [(ngModel)]="dishIngredient.comment"  (ngModelChange)="emitChange()" />
+</mat-form-field>
+
+}
+
+<button matButton="tonal"  type="button" class="add-ingredient-button full-width" (click)="addDishIngredient()">Add Ingredient</button>

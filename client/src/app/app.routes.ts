@@ -9,6 +9,11 @@ export const routes: Routes = [
         title: "Meal Planner - Ingredients",
         loadChildren: () => import("./features/ingredients/routes").then(m => m.ROUTES),
     },
-    { path: RoutePaths.Home, redirectTo: RoutePaths.Ingredients, pathMatch: "full" },
+    {
+        path: RoutePaths.Dishes,
+        title: "Meal Planner - Dishes",
+        loadChildren: () => import("./features/dishes/routes").then(m => m.ROUTES),
+    },
+    { path: RoutePaths.Home, redirectTo: RoutePaths.Dishes, pathMatch: "full" },
     { path: "**", component: NotFoundComponent },
 ];

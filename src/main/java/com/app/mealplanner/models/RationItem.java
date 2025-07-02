@@ -1,5 +1,6 @@
 package com.app.mealplanner.models;
 
+import com.app.mealplanner.common.enums.MealType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RationItem {
     private Long id;
-    private ServiceMealType mealType;
+    private MealType mealType;
     private Dish dish;
 }

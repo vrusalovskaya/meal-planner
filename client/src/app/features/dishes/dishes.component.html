@@ -1,0 +1,5 @@
+<h2 class="center">Dishes</h2>
+<div class="center">
+   <button matButton="filled" (click)="onAddDishClicked()">Add Dish</button>
+</div>
+<mp-dish-list [dishes]="dishes" (dishDelete)="onDishDelete($event)" (dishEdit)="onDishEdit($event)" ></mp-dish-list>
