@@ -1,0 +1,42 @@
+.rations {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1rem;
+   margin-top: 1rem;
+}
+
+.pointer {
+   cursor: pointer;
+   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pointer:hover {
+   transform: translateY(-4px);
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button {
+   margin: 1.5rem;
+}
+
+.menu-header {
+   display: flex;
+   align-items: center;
+   position: relative;
+   width: 100%;
+}
+
+.menu-header h2 {
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+   margin: 0;
+}
+
+.add-button {
+   margin-left: auto;
+}
+
+.add-button:hover {
+   background-color: #96c3f7; 
+}

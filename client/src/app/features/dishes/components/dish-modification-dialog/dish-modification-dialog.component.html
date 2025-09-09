@@ -3,7 +3,7 @@
 <mat-dialog-content>
    <form #form="ngForm" (ngSubmit)="save()" class="full-width">
 
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field class="full-width first-input">
          <mat-label>Dish name</mat-label>
          <input matInput name="name" required maxlength="256" [(ngModel)]="dish.name" #nameCtrl="ngModel" />
          <mat-error>
@@ -32,11 +32,12 @@
          <mat-hint align="end">{{dish.recipeDescription.length}} / 2000</mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field class="full-width">
          <mat-label>Recipe link</mat-label>
-         <input matInput name="recipeExternalLink" maxlength="255"  pattern="^(https?://)[\w-]+(\.[\w-]+)+[/#?]?.*$" [(ngModel)]="dish.recipeExternalLink"
+         <input type="url" matInput name="recipeExternalLink" maxlength="255"
+            pattern="^(http(s){0,1}:\/\/.){0,1}[\-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([\-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$" [(ngModel)]="dish.recipeExternalLink"
             #recipeExternalLinkCtrl="ngModel" />
-            <mat-error> Not a link</mat-error>
+         <mat-error>Not a link</mat-error>
       </mat-form-field>
 
    </form>

@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<mat-dialog-content>
+   <form #menuForm="ngForm" class="full-width">
+
+      <div class="date-range-container">
+         <mat-form-field class="full-width">
+            <mat-label>Menu Date Range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" [dateFilter]="dateFilter">
+               <input readonly matStartDate placeholder="Start date" name="startDate" [(ngModel)]="menu.startDate"
+                  #startCtrl="ngModel" required>
+               <input readonly matEndDate placeholder="End date" name="endDate" [(ngModel)]="menu.endDate"
+                  #endCtrl="ngModel" required>
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker (closed)="onDatePickerClosed()" #picker></mat-date-range-picker>
+            <mat-error>Both start and end dates are required</mat-error>
+         </mat-form-field>
+      </div>
+
+      @for (ration of menu.rations; track ration.id) {
+      <div class="ration-container">
+         <h4 class="center">{{ ration.date | date:'fullDate' }}</h4>
+         <div>
+            @for (rationItem of ration.rationItems; track rationItem.id) {
+            <div class="ration-item">
+               <mat-chip>{{ rationItem.mealType }}</mat-chip>
+               <mp-dish-editing [dishesList]="dishesByMealType(rationItem.mealType)" [initialDish]="rationItem.dish"
+                  (dishChange)="rationItem.dish = $event">
+               </mp-dish-editing>
+            </div>
+            }
+         </div>
+      </div>
+      }
+
+      @if(menu.startDate && menu.endDate && !isMenuValid()){
+      <mat-error> Please select a dish for every meal.</mat-error>
+      }
+   </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+   <button mat-button mat-dialog-close>Cancel</button>
+   <button mat-raised-button color="primary" (click)="save()" [disabled]="menuForm.invalid || !isMenuValid()">
+      {{ isEdit ? 'Update' : 'Create' }}
+   </button>
+</mat-dialog-actions>

@@ -1,8 +1,6 @@
 import { Injectable, Injector } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 
-import { firstValueFrom } from "rxjs";
-
 import { IngredientModificationDialogComponent } from "../components/ingredient-modification-dialog/ingredient-modification-dialog.component";
 import { Ingredient } from "../../../core/models/ingredient.model";
 

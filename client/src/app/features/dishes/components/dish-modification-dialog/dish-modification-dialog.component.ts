@@ -57,6 +57,7 @@ export class DishModificationDialogComponent {
             selected: !!this.dish!.mealTypes.find(t => t === k),
             value: k
          }));
+         this.dish = {...dish}
       } else {
          this.mealTypesOptions = MEAL_TYPES_KEYS.map(k => ({ selected: false, value: k }));
          this.title = "Add dish";

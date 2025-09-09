@@ -1,0 +1,32 @@
+<mat-dialog-content class = "line-formatting">
+<h2 class="center">{{ration.date | date:'EEEE, MMMM d' }}</h2>
+@for (rationItem of ration.rationItems; track rationItem.id) {
+
+<p class="center"><mat-chip>{{rationItem.mealType}}</mat-chip></p>
+<div class="dish">
+   <h3 class="center">{{rationItem.dish.name}}</h3>
+   <table mat-table [dataSource]=rationItem.dish.dishIngredients>
+
+      <ng-container matColumnDef="ingredient">
+         <th mat-header-cell *matHeaderCellDef> Ingredient </th>
+         <td mat-cell *matCellDef="let dishIngredient"> {{dishIngredient.ingredient.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+         <th mat-header-cell *matHeaderCellDef> Quantity </th>
+         <td mat-cell *matCellDef="let dishIngredient"> {{dishIngredient.quantity}} {{dishIngredient.unit}}
+            @if (dishIngredient.comment) { ({{dishIngredient.comment}}) } </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   </table>
+   {{rationItem.dish.recipeDescription}}
+   <br>
+   @if (isValidUrl(rationItem.dish.recipeExternalLink)) {
+   <a matButton="outlined" [href]="getSafeUrl(rationItem.dish.recipeExternalLink)" rel="noopener noreferrer" target="_blank">
+      Recipe link
+   </a>}
+</div>
+}
+</mat-dialog-content>

@@ -1,0 +1,17 @@
+<mat-form-field class="full-width">
+   <mat-label>Dish</mat-label>
+   <input type="text" [(ngModel)]="initialDish" matInput #input="ngModel" (keyup)="onDishInput(input)"
+      [matAutocomplete]="auto" required name="initialDish" />
+
+   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onDishSelected($event, input)"
+      [displayWith]="formatOption" [autoActiveFirstOption]="false">
+      @for (dish of filteredDishes; track dish.id) {
+      <mat-option [value]="dish">
+         {{dish.name}}
+      </mat-option>
+      }
+   </mat-autocomplete>
+
+   <mat-error>Selection required</mat-error>
+
+</mat-form-field>

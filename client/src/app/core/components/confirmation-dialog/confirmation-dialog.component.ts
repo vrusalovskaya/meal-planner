@@ -46,10 +46,11 @@ export class ConfirmationDialogComponent {
    async onConfirm(): Promise<void> {
       this.loadingOverlayService.show();
       this.dialogRef.disableClose = true;
-      const confirmAction = this.paratemers.confirmAction ? this.paratemers.confirmAction : Promise.resolve;
 
       try {
-         await confirmAction();
+         if (this.paratemers.confirmAction) {
+            await this.paratemers.confirmAction();
+         }
          this.dialogRef.close(true);
       } finally {
          this.loadingOverlayService.hide();

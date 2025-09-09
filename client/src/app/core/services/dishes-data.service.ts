@@ -20,7 +20,7 @@ export class DishesDataService {
    }
 
    async addDish(dish: Dish): Promise<Dish> {
-      return await firstValueFrom(this.http.post<Dish>(this.buildUrl('dishes'), this.toDto(dish)));
+      return await firstValueFrom(this.http.post<Dish>(this.buildUrl('dishes'), dish));
    }
 
    async editDish(dish: Dish): Promise<Dish> {
@@ -29,24 +29,5 @@ export class DishesDataService {
 
    private buildUrl(value: string): string {
       return `${environment.apiUrl}/${value}`;
-   }
-
-   private toDto(dish: Dish): any {
-      return {
-         name: dish.name,
-         recipeDescription: dish.recipeDescription,
-         recipeExternalLink: dish.recipeExternalLink,
-         mealTypes: Array.from(new Set(dish.mealTypes)),
-         dishIngredients: dish.dishIngredients.map(di => ({
-            ingredientDto: {
-               id: di.ingredient.id,
-               name: di.ingredient.name,
-               possibleUnits: Array.from(new Set(di.ingredient.possibleUnits))
-            },
-            quantity: di.quantity,
-            unit: di.unit,
-            comment: di.comment,
-         })),
-      };
    }
 }

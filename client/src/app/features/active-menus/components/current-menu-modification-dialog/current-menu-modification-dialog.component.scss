@@ -1,0 +1,17 @@
+.ration-item {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   margin-bottom: 12px;
+   width: 100%;
+}
+
+.ration-item mat-chip {
+   flex: 0 0 7rem;
+}
+
+.ration-item mp-dish-editing {
+   flex: 1 1 auto;
+   display: block;
+   min-width: 0;
+}

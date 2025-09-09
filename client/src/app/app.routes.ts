@@ -14,6 +14,16 @@ export const routes: Routes = [
         title: "Meal Planner - Dishes",
         loadChildren: () => import("./features/dishes/routes").then(m => m.ROUTES),
     },
-    { path: RoutePaths.Home, redirectTo: RoutePaths.Dishes, pathMatch: "full" },
+    {
+        path: RoutePaths.ArchiveMenus,
+        title: "Meal Planner - Archive Menus",
+        loadChildren: () => import("./features/archive-menus/routes").then(m => m.ROUTES),
+    },
+    {
+        path: RoutePaths.ActiveMenus,
+        title: "Meal Planner - Active Menus",
+        loadChildren: () => import("./features/active-menus/routes").then(m => m.ROUTES),
+    },
+    { path: RoutePaths.Home, redirectTo: RoutePaths.ActiveMenus, pathMatch: "full" },
     { path: "**", component: NotFoundComponent },
 ];

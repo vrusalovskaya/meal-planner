@@ -1,0 +1,6 @@
+<mat-accordion multi>
+@for (futureMenu of sortedMenus; track futureMenu.id) {
+      <mp-future-menu class="menu" [futureMenu]="futureMenu" 
+      (deleteAction)="onMenuDelete(futureMenu)" (editAction)="onMenuEdit(futureMenu)"></mp-future-menu>
+}
+</mat-accordion>

@@ -1,5 +1,7 @@
 export enum RoutePaths {
    Home = "",
    Ingredients = "ingredients",
-   Dishes = "dishes"
+   Dishes = "dishes",
+   ArchiveMenus = "archive",
+   ActiveMenus = "active-menus"
 }

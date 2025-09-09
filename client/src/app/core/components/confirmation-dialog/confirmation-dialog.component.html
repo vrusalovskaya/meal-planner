@@ -5,10 +5,12 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-   <button mat-button (click)="onConfirm()">
+   <button mat-button cdkFocusInitial (click)="onConfirm()">
       {{paratemers.confirmButtonText}}
    </button>
-   <button cdkFocusInitial mat-button (click)="onCancel()">
+   @if (paratemers.cancelButtonText) {
+   <button mat-button (click)="onCancel()">
       {{paratemers.cancelButtonText}}
    </button>
+   }
 </mat-dialog-actions>

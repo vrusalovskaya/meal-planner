@@ -1,0 +1,38 @@
+@if (currentMenu){
+<div class="menu-header">
+   <h2 class="center">Menu for {{currentMenu.startDate | date:'MMMM d'}} - {{currentMenu.endDate | date:'MMMM d'}}</h2>
+   <button matFab extended class="add-button button" (click) = "onAddMenuClicked()"> <mat-icon>add</mat-icon>
+      Create menu
+   </button>
+</div>
+
+<div class="rations center">
+   @for (ration of currentMenu.rations; track ration.id) {
+   <mat-card (click)="onRationCardClicked(ration)" class="pointer">
+      <mat-card-header class="center">
+         <mat-card-subtitle>{{ration.date | date:'EEEE, MMMM d' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+         @for (rationItem of ration.rationItems; track rationItem.id) {
+
+         <p><mat-chip>{{rationItem.mealType}}</mat-chip> {{rationItem.dish.name}}</p>
+         }
+      </mat-card-content>
+
+   </mat-card>
+   }
+</div>
+<div class="center button">
+   <button matButton="outlined" (click)="onEditCurrentMenuClicked(currentMenu)">Edit current menu</button>
+</div>
+}
+@else{<h2 class="center">There is no menu for current date. Please create one</h2>
+<div class="center button">
+   <button matFab extended (click) = "onAddMenuClicked()"> <mat-icon>add</mat-icon>
+      Create menu
+   </button>
+</div>
+}
+
+<h3 class="center">Future menus</h3>
+<mp-future-menus-list [futureMenus]="futureMenus" (menuDelete)="onMenuDelete($event)" (menuEdit)="onMenuEdit($event)"></mp-future-menus-list>
