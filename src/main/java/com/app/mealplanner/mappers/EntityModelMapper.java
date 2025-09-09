@@ -4,6 +4,7 @@ import com.app.mealplanner.entities.*;
 import com.app.mealplanner.models.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EntityModelMapper {
     public static Ingredient toModel(IngredientEntity ingredientEntity) {
@@ -92,5 +93,26 @@ public class EntityModelMapper {
                 menu.getEndDate(),
                 menu.getRations().stream().map(EntityModelMapper::toEntity).toList()
         );
+    }
+
+    public static List<DailyRationEntity> toCreateEntities(List<DailyRation> dailyRations) {
+        List<DailyRationEntity> dailyRationEntities = new ArrayList<>();
+
+        for (DailyRation ration : dailyRations) {
+            DailyRationEntity dailyRationEntity = new DailyRationEntity();
+            dailyRationEntity.setDate(ration.getDate());
+            ArrayList<RationItemEntity> rationItemEntities = new ArrayList<>();
+
+            for (RationItem rationItem : ration.getRationItems()) {
+                RationItemEntity rationItemEntity = new RationItemEntity();
+                rationItemEntity.setMealType(rationItem.getMealType());
+                rationItemEntity.setDish(toEntity(rationItem.getDish()));
+                rationItemEntities.add(rationItemEntity);
+            }
+
+            dailyRationEntity.setRationItems(rationItemEntities);
+            dailyRationEntities.add(dailyRationEntity);
+        }
+        return dailyRationEntities;
     }
 }

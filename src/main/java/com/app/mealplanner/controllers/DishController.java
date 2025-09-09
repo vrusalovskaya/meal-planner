@@ -34,9 +34,10 @@ public class DishController {
     @PostMapping
     public ResponseEntity<DishDto> create(@RequestBody DishCreateDto dishCreateDto) {
         List<DishIngredient> dishIngredients = new ArrayList<>();
+        //вынести в маппер?
         for (DishIngredientCreateDto dishIngredientDto : dishCreateDto.getDishIngredients()) {
             DishIngredient dishIngredient = new DishIngredient();
-            dishIngredient.setIngredient(ModelDtoMapper.toModel(dishIngredientDto.getIngredientDto()));
+            dishIngredient.setIngredient(ModelDtoMapper.toModel(dishIngredientDto.getIngredient()));
             dishIngredient.setQuantity(dishIngredientDto.getQuantity());
             dishIngredient.setUnit(dishIngredientDto.getUnit());
             dishIngredient.setComment(dishIngredientDto.getComment());
@@ -48,7 +49,7 @@ public class DishController {
 
         DishDto createdDishDto = ModelDtoMapper.toDto(createdDish);
 
-        URI location = URI.create(String.format("/api/v1/ingredients/%d", createdDishDto.getId()));
+        URI location = URI.create(String.format("/api/v1/dishes/%d", createdDishDto.getId()));
         return ResponseEntity.created(location).body(createdDishDto);
     }
 
